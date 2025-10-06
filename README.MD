@@ -1,3 +1,5 @@
+## Consegna
+
 ```
 💡 Nota: a differenza di quanto visto finora negli esempi, per accedere all'API utilizzare l'url base:
 
@@ -68,7 +70,7 @@ getDashboardData("london")
   city: "London",
   country: "United Kingdom",
   temperature: 18,
-	weather: "Partly cloudy",
+  weather: "Partly cloudy",
   airport: "London Heathrow Airport"
 }
 
@@ -88,7 +90,7 @@ The main airport is London Heathrow Airport.
   city: "Vienna",
   country: "Austria",
   temperature: null,
-	weather: null,
+  weather: null,
   airport: "Vienna International Airport"
 }
 
