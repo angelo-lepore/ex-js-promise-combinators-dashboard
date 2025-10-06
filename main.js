@@ -21,25 +21,35 @@ async function getDashboardData(query) {
     const promises = [destinationsPromise, weathersPromise, airportsPromise];
     const [destinations, weathers, airports] = await Promise.all(promises);
 
+    const destination = destinations[0];
+    const weather = weathers[0];
+    const airport = airports[0];
+
     return {
-      city: destinations[0].name,
-      country: destinations[0].country,
-      temperature: weathers[0].temperature,
-      weather: weathers[0].weather_description,
-      airport: airports[0].name,
+      city: destination?.name ?? null,
+      country: destination?.country ?? null,
+      temperature: weather?.temperature ?? null,
+      weather: weather?.weather_description ?? null,
+      airport: airport?.name ?? null,
     };
   } catch (error) {
     throw new Error(`Errore nel recupero dei dati: ${error.message}`);
   }
 }
 
-getDashboardData("London")
+getDashboardData("Vienna")
   .then((data) => {
     console.log("Dasboard data:", data);
-    console.log(
-      `${data.city} is in ${data.country}.\n` +
-        `Today there are ${data.temperature} degrees and the weather is ${data.weather}.\n` +
-        `The main airport is ${data.airport}.\n`
-    );
+    let output = "";
+    if (data.city !== null && data.country !== null) {
+      output += `${data.city} is in ${data.country}.\n`;
+    }
+    if (data.temperature !== null && data.weather !== null) {
+      output += `Today there are ${data.temperature} degrees and the weather is ${data.weather}.\n`;
+    }
+    if (data.airport !== null) {
+      output += `The main airport is ${data.airport}.\n`;
+    }
+    console.log(output);
   })
   .catch((error) => console.error(error));
